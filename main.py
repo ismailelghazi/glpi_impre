@@ -9,7 +9,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
 TIMEOUT = 60
 
-
+text="sadt"
 
 def login():
     bot=driver.get("http://localhost/glpi/index.php?noAUTO=1")
@@ -31,13 +31,21 @@ def imprimante():
     imp.click()
     time.sleep(6)
 
+def text(text):
+
 def insert_data():
-    dropdown = driver.find_element(By.XPATH, '/html/body/div[2]/div/div/main/div/div/div[2]/div/div/div/div/form/div/div[3]/div/div/div/div/div[2]/div/div/select')  # replace 'dropdown_id' with the actual ID of the dropdown element
-    time.sleep(7)
-    options = dropdown.options
-    for option in options:
-        print(option.text)
-    time.sleep(555)
+    dropdown = driver.find_element(By.XPATH, '/html/body/div[2]/div/div/main/div/div/div[2]/div/div/div/div/form/div/div[3]/div/div/div/div/div[2]/div/div/span/span[1]/span/span[1]')  # replace 'dropdown_id' with the actual ID of the dropdown element
+    time.sleep(2)
+    dropdown.click()
+    time.sleep(2)
+    er = driver.find_element(By.CSS_SELECTOR , 'body > span.select2-container.select2-container--open')
+    test = er.find_elements(By.CSS_SELECTOR , 'span span.select2-results > ul li[role="group"] ul li')
+    for li in test:
+        heo=li.get_attribute('title').replace(" ""-", "")
+        if text in heo:
+            li.click()
+            break
+    time.sleep(52)
 
 
 if __name__ == '__main__':
